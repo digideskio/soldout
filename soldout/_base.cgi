@@ -153,7 +153,7 @@ sub OutHeader
 	$GZIP_ENABLE=0;
 	print "Cache-Control: no-cache, no-store\n";
 	print "Pragma: no-cache\n";
-	print "Content-type: text/html; charset=Shift_JIS\n";
+	print "Content-type: text/html; charset=UTF-8\n";
 	
 	print ("\n"),return if $ENV{REQUEST_METHOD} eq "HEAD" || !$GZIP_PATH || $ENV{HTTP_ACCEPT_ENCODING}!~/(x-gzip|gzip)/ || !open(GZIP,"| ".$GZIP_PATH);
 	
