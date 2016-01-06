@@ -81,7 +81,6 @@ $CUSTOM_DIR			='./custom';			# カスタムデータディレクトリ(755)
 $TOWN_DIR			='./town';				# 他街データ格納ディレクトリ(755)
 $MARKET_DIR			='./market';			# 外出先データ格納ディレクトリ(755)
 $GUILD_DIR			='./guild';				# ギルドデータディレクトリ(755)
-$JCODE_FILE			=$INCLUDE_DIR.'/jcode.pl';# jcode.plの位置
 $GZIP_PATH			='';					# gzipのパス&オプション(圧縮転送が有効になる)
 											#   設定不正の場合は動作不可(パスチェック無し)
 											#   例) '/usr/bin/gzip --fast --stdout'

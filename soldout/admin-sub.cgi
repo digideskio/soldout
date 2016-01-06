@@ -2,7 +2,6 @@
 # $Id: admin-sub.cgi 96 2004-03-12 12:25:28Z mu $
 
 require './_base.cgi';
-require $JCODE_FILE;
 
 GetQuery();
 
@@ -14,7 +13,7 @@ OutError('') if !$MASTER_USER || $USER ne 'soldoutadmin';
 OutError('ユーザが見つかりません') if !defined($name2idx{$Q{user}});
 my $DT=$DT[$name2idx{$Q{user}}];
 
-$Q{comment}="【".jcode::sjis($Q{comment})."】" if $Q{comment} ne '';
+$Q{comment}="【".$Q{comment}."】" if $Q{comment} ne '';
 $disp.="$DT->{shopname} [$DT->{name}] $Q{comment} ";
 
 #重複登録自動アクセス制限の個別対応
@@ -27,7 +26,6 @@ if($Q{nocheckip})
 #アクセス制限制御
 if($Q{blocklogin})
 {
-	$Q{blocklogin}=jcode::sjis($Q{blocklogin});
 	if($Q{blocklogin} eq 'off')
 	{
 		$disp.='アクセス制限を解除しました';

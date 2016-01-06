@@ -2,14 +2,13 @@
 # $Id: user.cgi 106 2004-03-17 13:15:34Z mu $
 
 require './_base.cgi';
-require $JCODE_FILE;
 
 GetQuery();
 
 #コメント変更
 if(defined($Q{cmt}))
 {
-	$comment=jcode::sjis($Q{cmt},$CHAR_SHIFT_JIS&&'sjis');
+	$comment=$Q{cmt};
 	OutError('コメントの文字数が多いです。') if length($comment)>50;
 	$comment=~s/&/&amp;/g;
 	$comment=~s/>/&gt;/g;
@@ -36,7 +35,6 @@ if(defined($Q{cls}))
 #店舗名変更
 if($Q{rename}ne'')
 {
-	$Q{rename}=jcode::sjis($Q{rename},$CHAR_SHIFT_JIS&&'sjis');
 	OutError('名前・店名・パスワードに使用できない文字が含まれています。') if $Q{rename} =~ /([,:;\t\r\n<>&])/;
 	OutError('店名は20文字以内です。') if length($Q{rename})>40;
 	OutError('店名が短すぎます。') if length($Q{rename})<4;
@@ -97,7 +95,7 @@ if($Q{cls}eq'closeshop')
 	else
 	{
 		CloseShop($DT->{id},'追放');
-		$Q{closecmt}="【".jcode::sjis($Q{closecmt})."】" if $Q{closecmt}ne'';
+		$Q{closecmt}="【".$Q{closecmt}."】" if $Q{closecmt}ne'';
 		WriteLog(1,0,0,$Q{closecmt}.$DT->{shopname}."は追放されました",1);
 		$disp.="追放完了";
 	}
@@ -156,7 +154,7 @@ if($Q{option} eq 'set')
 if($USE_USER_TITLE && $Q{usertitle} && $DTidx==0)
 {
 	my $msg=$Q{usertitle};
-	$msg=$msg eq 'delete' ? '' : EscapeHTML(jcode::sjis($msg,$CHAR_SHIFT_JIS&&'sjis')." by $DT->{shopname}");
+	$msg=$msg eq 'delete' ? '' : EscapeHTML($msg)." by $DT->{shopname}");
 	SetTownData('sub_title',$msg);
 	$disp.='サブタイトルを変更しました';
 }

@@ -33,14 +33,10 @@ sub ReadLog
 		}
 		if($keyword)
 		{
-			require $JCODE_FILE;
-			$keyword=jcode::sjis($keyword,$CHAR_SHIFT_JIS&&'sjis');
 			@MESSAGE=grep(/\Q$keyword\E/oi,@MESSAGE);
 		}
 		if($target)
 		{
-			require $JCODE_FILE;
-			$target=jcode::sjis($target,$CHAR_SHIFT_JIS&&'sjis');
 			@MESSAGE=grep(/\Q$target\E/o,@MESSAGE);
 		}
 		@MESSAGE=("0,0,0,0,情報はありません,0\n") if !scalar(@MESSAGE);
@@ -125,8 +121,7 @@ sub WriteBBS
 	return ($msg,'発言は半角'.$maxlength.'文字(全角'.int($maxlength/2).'文字)までです。現在半角'.length($msg).'文字です。<br>')
 		if length($msg)>$maxlength;
 	
-	require $JCODE_FILE;
-	my $msg=CutStr(jcode::sjis($msg,$CHAR_SHIFT_JIS&&'sjis'),$maxlength);
+	my $msg=CutStr($msg,$maxlength);
 	$msg=~s/&/&amp;/g;
 	$msg=~s/>/&gt;/g;
 	$msg=~s/</&lt;/g;

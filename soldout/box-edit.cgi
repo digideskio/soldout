@@ -365,10 +365,8 @@ sub CheckOutBoxBuffer
 
 sub CheckNewBoxArg
 {
-	require $JCODE_FILE;
-	
-	$Q{msg}=CutStr(jcode::sjis($Q{msg},$CHAR_SHIFT_JIS&&'sjis'),200);
-	$Q{title}=CutStr(jcode::sjis($Q{title},$CHAR_SHIFT_JIS&&'sjis'),40);
+	$Q{msg}=CutStr($Q{msg},200);
+	$Q{title}=CutStr($Q{title},40);
 	OutError('内容がありません'.$backurl) if $Q{msg}eq'';
 	$Q{title}="無題" if $Q{title}eq'';
 	$Q{price}+=0;

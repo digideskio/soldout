@@ -2,7 +2,6 @@
 # $Id: new.cgi 96 2004-03-12 12:25:28Z mu $
 
 require './_base.cgi';
-require $JCODE_FILE;
 GetQuery();
 
 DataRead();
@@ -18,9 +17,6 @@ if($Q{admin} ne $MASTER_PASSWORD)
 
 if($Q{sname}.$Q{name}.$Q{pass1}.$Q{pass2})
 {
-	$Q{name}=jcode::sjis($Q{name},$CHAR_SHIFT_JIS&&'sjis');
-	$Q{sname}=jcode::sjis($Q{sname},$CHAR_SHIFT_JIS&&'sjis');
-
 	if(($Q{sname}.$Q{name}.$Q{pass1}.$Q{pass2}) =~ /([,:;\t\r\n<>&])/
 	|| ($Q{pass1}.$Q{pass2}.$Q{name}) =~ /([^A-Za-z0-9_\-])/
 	|| $Q{name} eq 'soldoutadmin'

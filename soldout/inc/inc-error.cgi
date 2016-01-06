@@ -18,11 +18,6 @@ my $body=join("\n",
 	$Q{INPUT_DATA},
 	$msg,
 );
-if($JCODE_FILE)
-{
-	require $JCODE_FILE;
-	$body=jcode::jis($body);
-}
 
 if($SENDMAIL && $ADMIN_EMAIL && -s "$DATA_DIR/$ERROR_COUNT_FILE$FILE_EXT"<$MAX_ERROR_COUNT && open(MAIL,"| $SENDMAIL $ADMIN_EMAIL"))
 {
@@ -37,7 +32,6 @@ if($SENDMAIL && $ADMIN_EMAIL && -s "$DATA_DIR/$ERROR_COUNT_FILE$FILE_EXT"<$MAX_E
 			"エラー数が $MAX_ERROR_COUNT になりましたので、以後のメール送信は行いません。",
 			"管理メニューにてエラーカウントをリセットしてください。",
 		);
-		$footer=jcode::jis($footer) if $JCODE_FILE;
 	}
 	print MAIL qq|Subject: $subject \[AUTO\]\nFrom: $ADMIN_EMAIL\nTo: $ADMIN_EMAIL\n\n$body\n$footer\n|;
 	close(MAIL);
