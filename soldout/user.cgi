@@ -1,4 +1,4 @@
-#! /usr/local/bin/perl
+#!/usr/bin/env perl
 # $Id: user.cgi 106 2004-03-17 13:15:34Z mu $
 
 require './_base.cgi';

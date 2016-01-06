@@ -1,4 +1,4 @@
-#! /usr/local/bin/perl
+#!/usr/bin/env perl
 # ↑サーバの設定に従って変更してください。
 # このファイルのパーミッションは755(or705or700)です。
 # $Id: admin.cgi 96 2004-03-12 12:25:28Z mu $

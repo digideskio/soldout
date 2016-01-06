@@ -1,4 +1,4 @@
-#! /usr/local/bin/perl
+#!/usr/bin/env perl
 # $Id: buy.cgi 96 2004-03-12 12:25:28Z mu $
 
 $NOMENU=1;

@@ -1,4 +1,4 @@
-#! /usr/local/bin/perl
+#!/usr/bin/env perl
 # $Id: makeitem.cgi 96 2004-03-12 12:25:28Z mu $
 
 #BEGIN{$SIG{__WARN__}=$SIG{__DIE__}=sub{$DEBUG_PRINT=1; $incdir=$INCLUDE_DIR; $incdir||="./inc"; require "$incdir/inc-error.cgi";};}

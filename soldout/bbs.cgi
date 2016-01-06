@@ -1,4 +1,4 @@
-#! /usr/local/bin/perl
+#!/usr/bin/env perl
 # $Id: bbs.cgi 96 2004-03-12 12:25:28Z mu $
 
 $NOITEM=1;
