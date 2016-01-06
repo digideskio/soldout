@@ -17,7 +17,8 @@ $g_define->{dirname}=$MYDIR; # 設置ディレクトリ名(@@if等で利用可)
 
 print "Cache-Control: no-cache, must-revalidate\n";
 print "Pragma: no-cache\n";
-print "Content-type: text/html\n\n<html><head><title>商品データ生成</title></head><body>";
+print "Content-type: text/html; charset=UTF-8\n\n";
+print "<html><head><title>商品データ生成</title></head><body>";
 $mode=CheckPassword();                     # パスワードチェック/動作モード取得
 
 print <<"HTML" if $ENV{HTTP_REFERER} ne '';
