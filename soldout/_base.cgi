@@ -110,41 +110,21 @@ sub CheckMobile
 {
 	my $agent=$ENV{HTTP_USER_AGENT};
 
-	if($agent=~/(DoCoMo|UP\.Browser|J-PHONE)/ || $ENV{HTTP_X_JPHONE_MSNAME} || $DEBUG_MOBILE)
+	$TB	="<TABLE>";
+	$TB2 ="<TABLE>";
+	$TBE="</TABLE>\n";
+	$TR	="<TR>";
+	$TRE="</TR>\n";
+	$TD	="<TD>";
+	$TDNW="<TD NOWRAP>";
+	$TDE="</TD>\n";
+	$LIST_PAGE_ROWS=$LIST_PAGE_ROWS_PC;
+	$METHOD=qq|method="POST"|;
+
+	# Netscape Navigator では img 関連のスタイルシート記述を削除
+	if($ENV{HTTP_USER_AGENT}=~/^Mozilla\/[234][.\d]* \[\w+\]/)
 	{
-		#携帯系
-		$MOBILE=1;
-		$TB	="";
-		$TB2="";
-		$TBE="<BR>";
-		$TR	="";
-		$TRE="<BR>";
-		$TD	="<BR>";
-		$TDNW="<BR>";
-		$TDE="";
-		$LIST_PAGE_ROWS=$LIST_PAGE_ROWS_MOBILE;
-		$METHOD=qq|method="GET"|;
-	}
-	else
-	{
-		#パソコン系
-		$MOBILE=0;
-		$TB	="<TABLE>";
-		$TB2 ="<TABLE>";
-		$TBE="</TABLE>\n";
-		$TR	="<TR>";
-		$TRE="</TR>\n";
-		$TD	="<TD>";
-		$TDNW="<TD NOWRAP>";
-		$TDE="</TD>\n";
-		$LIST_PAGE_ROWS=$LIST_PAGE_ROWS_PC;
-		$METHOD=qq|method="POST"|;
-		
-		# Netscape Navigator では img 関連のスタイルシート記述を削除
-		if($ENV{HTTP_USER_AGENT}=~/^Mozilla\/[234][.\d]* \[\w+\]/)
-		{
-			$HTML_HEAD=~s/\bIMG.*?\{.*?\}\s*\r?\n?//ig;
-		}
+		$HTML_HEAD=~s/\bIMG.*?\{.*?\}\s*\r?\n?//ig;
 	}
 }
 
@@ -176,19 +156,19 @@ sub OutHTML
 	my $disp="";
 	
 	print '<HTML><HEAD>',"\n";
-	print $HTML_HEAD if !$MOBILE;
+	print $HTML_HEAD;
 	
 	print '<TITLE>SOLD OUT ',$HTML_TITLE,':',$title,'</TITLE>',"\n",'</HEAD>',"\n";
-	print $MOBILE ? '<BODY>' : ('<BODY BGCOLOR="',$HTML_BODY_BGCOLOR,'" TEXT="',$HTML_BODY_TEXT,'" LINK="',$HTML_BODY_LINK,'" VLINK="',$HTML_BODY_VLINK,'" ALINK="',$HTML_BODY_ALINK,'" BACKGROUND="',$HTML_BODY_BACKGROUND,'">'),"\n";
+	print '<BODY BGCOLOR="',$HTML_BODY_BGCOLOR,'" TEXT="',$HTML_BODY_TEXT,'" LINK="',$HTML_BODY_LINK,'" VLINK="',$HTML_BODY_VLINK,'" ALINK="',$HTML_BODY_ALINK,'" BACKGROUND="',$HTML_BODY_BACKGROUND,'">',"\n";
 	
 	my $backurl=GetBackUrl() if $USER and $NOMENU || $Q{bk};
 	print($backurl,'<BR><BR>') if $backurl;
 	
-	if(!$NOMENU and !$MOBILE || $MYNAME eq 'menu.cgi')
+	if(!$NOMENU and ($MYNAME eq 'menu.cgi'))
 	{
 		print 'SOLD OUT ',$HTML_TITLE,' <A HREF="index.cgi">[トップ]</A> ';
 		print GetMenuTag('help','[経営入門]','','[説]');
-		print '<A HREF="',($MOBILE ? $HOME_PAGE_MOBILE : $HOME_PAGE),'" TARGET=_top>[ホーム]</A> ';
+		print '<A HREF="',$HOME_PAGE,'" TARGET=_top>[ホーム]</A> ';
 		
 		my $now=$DTlasttime+$TZ_JST-$DATE_REVISE_TIME;
 		my $nextday=$now+$ONE_DAY_TIME-($now % $ONE_DAY_TIME);
@@ -224,21 +204,20 @@ sub OutHTML
 		
 		print '<HR SIZE=1>';
 		my $bar="";
-		if(!$MOBILE)
+
+		print '<A HREF="port.cgi" target="_blank">[外部]</A> ' if $USE_PORT;
+
+		#@CUSTOM_MENU=('1url','1str','2url','2str'); # debug
+		for(my $idx=0; $idx<@CUSTOM_MENU; $idx+=2)
 		{
-			print '<A HREF="port.cgi" target="_blank">[外部]</A> ' if $USE_PORT;
-			
-			#@CUSTOM_MENU=('1url','1str','2url','2str'); # debug
-			for(my $idx=0; $idx<@CUSTOM_MENU; $idx+=2)
-			{
-				print '<A HREF="',$CUSTOM_MENU[$idx],'" target="_blank">[',$CUSTOM_MENU[$idx+1],']</A> ';
-			}
-			if(@CUSTOM_MENU || $USE_PORT)
-			{
-				print '<small>(別ウィンドウ)</small><br>';
-				$bar='<HR SIZE=1>';
-			}
+			print '<A HREF="',$CUSTOM_MENU[$idx],'" target="_blank">[',$CUSTOM_MENU[$idx+1],']</A> ';
 		}
+		if(@CUSTOM_MENU || $USE_PORT)
+		{
+			print '<small>(別ウィンドウ)</small><br>';
+			$bar='<HR SIZE=1>';
+		}
+
 		if($USER && $USER ne 'soldoutadmin')
 		{
 			my $boxcount=$DT->{boxcount} ? '<FONT COLOR="#ff6666"><B>('.$DT->{boxcount}.')</B></FONT>' : '';
@@ -254,8 +233,6 @@ sub OutHTML
 		print $bar;
 	}
 	print CustomMenuBar() if defined &CustomMenuBar;
-	
-	print GetMenuTag('menu','[メニュー]'),'<br>' if $MOBILE && !$NOMENU && $MYNAME ne 'menu.cgi';
 	
 	print "\n",$$body,"\n";
 	

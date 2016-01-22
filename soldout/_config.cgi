@@ -70,7 +70,6 @@ HTML
 # 環境設定 
 #----------
 $HOME_PAGE			='/';					# ホームページURL
-$HOME_PAGE_MOBILE	='/';					# 携帯端末の場合のホームページURL
 $IMAGE_DIR			='./image';				# 画像ディレクトリ(755)
 $IMAGE_URL			='image';				# 画像URL(URLと実際のディレクトリが違う場合設定)
 $IMAGE_EXT			='.png';				# 画像フォーマット(.gif .jpg 等も画像を用意すれば使用可能)
@@ -214,7 +213,6 @@ $MAIN_LOG_PAGE_ROWS		=10;	# 「店長室」最近の出来事表示件数
 $SHOP_PAGE_ROWS			=5;		# 「他店」店舗表示件数
 $RANKING_PAGE_ROWS		=10;	# ランキング表示件数
 $LIST_PAGE_ROWS_PC		=20;	# 各種リスト表示件数(PC)
-$LIST_PAGE_ROWS_MOBILE	=5;		# 各種リスト表示件数(MOBILE)
 
 #----------
 # 表示設定 
@@ -304,7 +302,6 @@ $TOWN_TYPE			="normal";	# 街(商品データ)のタイプ設定
 #--------------
 # デバッグ設定 
 #--------------
-$DEBUG_MOBILE		=0;			# 1で携帯端末処理固定
 $DEBUG_PRINT		=1;			# 1で可能な限り500エラーの内容を表示
 								#   セキュリティ上の懸念があるため、デフォルトでは出力無し。
 								#   使用はローカルでの開発時のみに限定してください。

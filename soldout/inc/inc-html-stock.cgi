@@ -24,7 +24,7 @@ foreach my $cnt (0..$#ITEMTYPE)
 {
 	my $name=$ITEMTYPE[$cnt];
 	$name="&lt;".$name."&gt;" if $cnt==$tp;
-	$name=GetTagImgItemType(0,$cnt).$name if $cnt && !$MOBILE;
+	$name=GetTagImgItemType(0,$cnt).$name if $cnt;
 	$name="<A HREF=\"$MYNAME?$USERPASSURL&tp=$cnt\">".$name."</A>" if $cnt!=$tp;
 	
 	$disp.=$name." ";
@@ -58,34 +58,20 @@ else
 		=GetPage($pg,$LIST_PAGE_ROWS,scalar(@itemlist));
 	
 	$disp.=$TB;
-	if($MOBILE)
-	{
-		$tdh_sp="標準:";
-		$tdh_cs="維持:";
-		$tdh_st="在庫:";
-		$tdh_ts="本昨売:";
-		$tdh_ex="熟練:";
-		$tdh_sc="陳列:";
-		$tdh_mp="相場:";
-		$tdh_mb="需給:";
-	}
-	else
-	{
-		$disp.=$TR.$TD.
-			join($TD,
-				qw(
-					名称
-					標準<br>価格
-					維持費<br>1個24時間分
-					在庫数<br>/最大
-					今期<br>前期<br>売上
-					熟練度
-					陳列
-					販売価格<br>相場
-					需要供給<br>バランス
-				)
-			).$TRE;
-	}
+	$disp.=$TR.$TD.
+		join($TD,
+			qw(
+				名称
+				標準<br>価格
+				維持費<br>1個24時間分
+				在庫数<br>/最大
+				今期<br>前期<br>売上
+				熟練度
+				陳列
+				販売価格<br>相場
+				需要供給<br>バランス
+			)
+		).$TRE;
 	
 	foreach my $cnt (map{$itemlist[$_]}($pagestart..$pageend))
 	{

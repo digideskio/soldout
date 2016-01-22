@@ -2084,8 +2084,6 @@
 		argselect	店舗外観選択;001;タイプ1;002;タイプ2;003;タイプ3
 			use	1	陳列棚増築取壊キット
 		funci	_local_
-			return "" if $main::MOBILE;
-			
 			my $html="";
 			$html.='店舗一覧<br>';
 			my @fld=split(/;/,$USE->{argselect});

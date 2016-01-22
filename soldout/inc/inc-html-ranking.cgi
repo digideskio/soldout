@@ -11,34 +11,15 @@ $disp.=$pagecontrol."<BR>";
 
 $disp.=$TB;
 
-if(!$MOBILE)
-{
-	$disp.=$TR;
-	$disp.=$TDNW."順位<BR><SMALL>(前期比)</SMALL><br>点数";
-	$disp.=$TDNW.$SHOP_ICON_HEADER if $SHOP_ICON_HEADER && !$MOBILE;
-	$disp.=$TDNW."店名<BR>人気";
-	$disp.=$TDNW."今期売上";
-	$disp.=$TDNW."資金<BR>前期売上";
-	$disp.=$TDNW."前期<BR>維持費<BR>税金";
-	$disp.=$TD."取扱商品　一押商品<BR>【熟練度合計】【創業】 コメント";
-	$disp.=$TRE;
-}
-else
-{
-	$tdh_rk="RANK:";
-	$tdh_pt="点数:";
-	$tdh_nm="店名:";
-	$tdh_pp="人気:";
-	$tdh_mo="資金:";
-	$tdh_ts="本売:";
-	$tdh_ys="昨売:";
-	$tdh_cs="維持:";
-	$tdh_sc="一押:";
-	$tdh_cm="一言:";
-	$tdh_tx="昨税:";
-	$tdh_ex="熟練:";
-	$tdh_fd="創業:";
-}
+$disp.=$TR;
+$disp.=$TDNW."順位<BR><SMALL>(前期比)</SMALL><br>点数";
+$disp.=$TDNW.$SHOP_ICON_HEADER if $SHOP_ICON_HEADER;
+$disp.=$TDNW."店名<BR>人気";
+$disp.=$TDNW."今期売上";
+$disp.=$TDNW."資金<BR>前期売上";
+$disp.=$TDNW."前期<BR>維持費<BR>税金";
+$disp.=$TD."取扱商品　一押商品<BR>【熟練度合計】【創業】 コメント";
+$disp.=$TRE;
 
 foreach my $idx ($pagestart..$pageend)
 {
@@ -74,7 +55,7 @@ foreach my $idx ($pagestart..$pageend)
 	$disp.=$TR;
 	$disp.=$TDNW.$tdh_rk."<b>".($idx+1)."</b>".$rankupdown."<br>";
 	$disp.=    $tdh_pt.$DT->{point};
-	$disp.=$TD.GetTagImgShopIcon($DT->{icon}) if $SHOP_ICON_HEADER && !$MOBILE;
+	$disp.=$TD.GetTagImgShopIcon($DT->{icon}) if $SHOP_ICON_HEADER;
 	$disp.=$TD.$tdh_nm;
 	$disp.=    "<a href=\"shop.cgi?ds=$DT->{id}&$USERPASSURL\">" if !$GUEST_USER;
 	$disp.=    GetTagImgGuild($DT->{guild}).$itempro.$job.$DT->{shopname}."[".$DT->{name}."]";

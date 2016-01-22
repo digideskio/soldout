@@ -30,7 +30,6 @@ foreach my $idx ($pagestart..$pageend)
 	$disp.=GetTagImgGuild($DT->{guild}).$DT->{shopname};
 	$disp.="</a>" if !$GUEST_USER;
 	$disp.=$TD.$DT->{name}.$TD.$DT->{comment}.$TD.$itempro.$TD.$salelist.$TRE;
-	$disp.="<hr size=\"1\">" if $MOBILE;
 }
 $disp.=$TBE;
 

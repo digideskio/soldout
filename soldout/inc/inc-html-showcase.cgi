@@ -7,29 +7,17 @@ $disp.="●陳列棚：現在$showcasecount個：維持費 \\$SHOWCASE_COST[$sho
 my $usertaxrate=GetUserTaxRate($DT);
 
 $disp.=$TB;
-if(!$MOBILE)
-{
-	$disp.=$TR;
-	$disp.=$TD."棚No";
-	$disp.=$TD."商品名";
-	$disp.=$TD."売値";
-	$disp.=$TD."標準価格";
-	$disp.=$TD."売却税";
-	$disp.=$TD."在庫数";
-	$disp.=$TD."今期売上数";
-	$disp.=$TD."前期売上数";
-	$disp.=$TD;
-	$disp.=$TRE;
-}
-else
-{
-	$tdh_pr{$MOBILE}="売値:";
-	$tdh_sp{$MOBILE}="標準:";
-	$tdh_tx{$MOBILE}="売税:";
-	$tdh_st{$MOBILE}="在庫:";
-	$tdh_ts{$MOBILE}="本売:";
-	$tdh_ys{$MOBILE}="昨売:";
-}
+$disp.=$TR;
+$disp.=$TD."棚No";
+$disp.=$TD."商品名";
+$disp.=$TD."売値";
+$disp.=$TD."標準価格";
+$disp.=$TD."売却税";
+$disp.=$TD."在庫数";
+$disp.=$TD."今期売上数";
+$disp.=$TD."前期売上数";
+$disp.=$TD;
+$disp.=$TRE;
 
 for(my $cnt=0; $cnt<$DT->{showcasecount}; $cnt++)
 {
@@ -47,12 +35,12 @@ for(my $cnt=0; $cnt<$DT->{showcasecount}; $cnt++)
 	if($itemno)
 	{
 		my($taxrate,$tax)=GetSaleTax($itemno,1,$DT->{price}[$cnt],$usertaxrate);
-		$disp.=$TD.$tdh_pr{$MOBILE}."\\".$DT->{price}[$cnt];
-		$disp.=$TD.$tdh_sp{$MOBILE}."\\".$ITEM->{price};
-		$disp.=$TD.$tdh_tx{$MOBILE}."\\".$tax." (税率".$taxrate."%)";
-		$disp.=$TD.$tdh_st{$MOBILE}.$stock.$scale;
-		$disp.=$TD.$tdh_ts{$MOBILE}.($DT->{itemtoday}{$itemno}+0).$scale;
-		$disp.=$TD.$tdh_ys{$MOBILE}.($DT->{itemyesterday}{$itemno}+0).$scale;
+		$disp.=$TD."\\".$DT->{price}[$cnt];
+		$disp.=$TD."\\".$ITEM->{price};
+		$disp.=$TD."\\".$tax." (税率".$taxrate."%)";
+		$disp.=$TD.$stock.$scale;
+		$disp.=$TD.($DT->{itemtoday}{$itemno}+0).$scale;
+		$disp.=$TD.($DT->{itemyesterday}{$itemno}+0).$scale;
 		$disp.=$TD."<A HREF='showcase-edit.cgi?yen=1&$USERPASSURL&item=0&no=$cnt&bk=sc'>陳列中止</A>";
 	}
 	else

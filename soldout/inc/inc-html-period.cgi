@@ -11,6 +11,6 @@ foreach(@log)
 	my($tm,$mode,$id,$to,$message,$no)=split(/,/);
 	next if $id;
 	
-	$disp.=$message.("<br>","<hr>")[$MOBILE];
+	$disp.=$message."<br>";
 }
 1;

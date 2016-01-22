@@ -86,7 +86,7 @@ sub CheckLogin
 		
 		my $DT=$DT[$name2idx{$username}];
 		OutErrorBlockLogin($DT->{blocklogin}) if $DT->{blocklogin} ne '' && $DT->{blocklogin} ne 'mark';
-		OutErrorBlockLogin('重複登録疑惑') if !$MOBILE && $CHECK_IP && !$DT->{nocheckip} && $overlap;
+		OutErrorBlockLogin('重複登録疑惑') if $CHECK_IP && !$DT->{nocheckip} && $overlap;
 		
 		my $ref=ReadDTSub($DT,'login');
 		if($ref && $ref->{fail_count})

@@ -7,7 +7,7 @@ sub GetTagImgGuild
 	return "" if $guildcode eq '';
 	my $name=$GUILD{$guildcode}->[$GUILDIDX_name];
 	$name=(!$movetown ? "解散したギルド":"この街に存在しないギルド") if $name eq '';
-	return $name."所属 " if $MOBILE || $noimage;
+	return $name."所属 " if $noimage;
 	return qq|<IMG class="s" ALT="$name 所属" SRC="$IMAGE_URL/guild-$guildcode$IMAGE_EXT"> |;
 }
 

@@ -70,34 +70,18 @@ foreach my $cnt ($pagestart..$pageend)
 	my $msg=$MESSAGE[$cnt];
 	next if $msg eq '';
 	my($tm,$mode,$id,$to,$message,$no)=split(',',$msg);
-	
-	if($MOBILE)
-	{
-		if($id==$DT->{id})
-			{$disp.="秘:".$message;}
-		elsif($mode==1)
-			{$disp.="★重要:".$message;}
-		elsif($mode==2)
-			{$disp.="●情報:".$message;}
-		elsif($mode==3)
-			{$disp.="○行動:".$message;}
-		else
-			{$disp.=$message;}
-	}
+
+	if($id==$DT->{id})
+		{$disp.="<FONT COLOR=\"#66cc66\">".$message."(秘)</FONT>";}
+	elsif($mode==1)
+		{$disp.="<FONT COLOR=\"#FF0000\" SIZE=\"+1\"><B>[重要]".$message."</B></FONT>";}
+	elsif($mode==2)
+		{$disp.="<FONT COLOR=\"#FF0000\">[情報]".$message."</FONT>";}
+	elsif($mode==3)
+		{$disp.="[行動]<B>".$message."</B>";}
 	else
-	{
-		if($id==$DT->{id})
-			{$disp.="<FONT COLOR=\"#66cc66\">".$message."(秘)</FONT>";}
-		elsif($mode==1)
-			{$disp.="<FONT COLOR=\"#FF0000\" SIZE=\"+1\"><B>[重要]".$message."</B></FONT>";}
-		elsif($mode==2)
-			{$disp.="<FONT COLOR=\"#FF0000\">[情報]".$message."</FONT>";}
-		elsif($mode==3)
-			{$disp.="[行動]<B>".$message."</B>";}
-		else
-			{$disp.=$message;}
-	}
-	
+		{$disp.=$message;}
+
 	$disp.="<BR>";
 }
 

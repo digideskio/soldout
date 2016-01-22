@@ -1,6 +1,6 @@
 # $Id: inc-html-chat.cgi 96 2004-03-12 12:25:28Z mu $
 
-my $linemax=$MOBILE?10:$MAX_CHAT_MESSAGE;
+my $linemax=$MAX_CHAT_MESSAGE;
 
 my %printed=();
 
@@ -23,7 +23,7 @@ else
 	$disp.="出店者以外は閲覧のみ<HR>";
 }
 
-$disp.=$TB if !$MOBILE;
+$disp.=$TB;
 foreach(@MESSAGE)
 {
 	chop;
@@ -50,17 +50,9 @@ foreach(@MESSAGE)
 			$sname="<SMALL>closed</SMALL> ".$sname;
 		}
 	}
-	
-	if($MOBILE)
-	{
-		$disp.=$tm."<BR>".$no.":".$sname.":".$name."<BR>".$message;
-		$disp.="<HR SIZE=1>";
-	}
-	else
-	{
-		$disp.=$TR.$TD.$tm.$TD.$sname.$TD.$name.$TD.$no.$TD.$message.$TRE;
-	}
+
+	$disp.=$TR.$TD.$tm.$TD.$sname.$TD.$name.$TD.$no.$TD.$message.$TRE;
 }
-$disp.=$TBE if !$MOBILE;
+$disp.=$TBE;
 
 1;

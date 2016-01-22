@@ -82,7 +82,7 @@ sub GetMarketStatusGraph
 	my $imgwidthl=$type==1 ? 50 : 50-$imgwidth;
 	my $imgwidthr=$type==2 ? 50 : 50-$imgwidth;
 	
-	if(!$MOBILE && !$noimage)
+	if(!$noimage)
 	{
 		if($type)
 		{
@@ -97,11 +97,6 @@ sub GetMarketStatusGraph
 			$ret.=qq|<img src="$IMAGE_URL/t$IMAGE_EXT" width="50" height="12"> 均衡 |;
 			$ret.=qq|<img src="$IMAGE_URL/t$IMAGE_EXT" width="50" height="12">|;
 		}
-	}
-	else
-	{
-		$width=!$type ? "" : " $width%";
-		$ret.=('均衡 ','飽和 ','不足 ')[$type].$width;
 	}
 	return $ret;
 }
