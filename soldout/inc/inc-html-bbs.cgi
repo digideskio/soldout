@@ -55,16 +55,8 @@ foreach(@MESSAGE[$pagestart..$pageend])
 			$sname="<SMALL>closed</SMALL> ".$sname;
 		}
 	}
-	
-	if($MOBILE)
-	{
-		$disp.=$tm."<BR>".$no.":".$sname.":".$name."<BR>".$message;
-		$disp.="<HR SIZE=1>";
-	}
-	else
-	{
-		$disp.=$TR.$TDNW.$tm.$TD.$sname.$TD.$name.$TD.$no.$TD.$message.$TRE;
-	}
+
+	$disp.=$TR.$TDNW.$tm.$TD.$sname.$TD.$name.$TD.$no.$TD.$message.$TRE;
 }
 $disp.=$TBE;
 

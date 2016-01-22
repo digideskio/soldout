@@ -42,15 +42,12 @@ foreach my $DT (@DT)
 }
 
 my $itemlist="";
-if($tp || !$MOBILE)
+$itemlist="<select name=itn>";
+foreach($ITEM[0],grep(!$tp || $_->{type}==$tp,sort{$a->{sort} <=> $b->{sort}}values(%itemlist)))
 {
-	$itemlist="<select name=itn>";
-	foreach($ITEM[0],grep(!$tp || $_->{type}==$tp,sort{$a->{sort} <=> $b->{sort}}values(%itemlist)))
-	{
-		$itemlist.="<option value=\"$_->{no}\"".($_->{no}==$itn?' SELECTED':'').">".$_->{name};
-	}
-	$itemlist.="</select>";
+	$itemlist.="<option value=\"$_->{no}\"".($_->{no}==$itn?' SELECTED':'').">".$_->{name};
 }
+$itemlist.="</select>";
 my($page,$pagestart,$pageend,$pagenext,$pageprev,$pagemax)
 	=GetPage($Q{pg},$LIST_PAGE_ROWS,$#itemlist+1);
 
@@ -60,14 +57,14 @@ $disp.="<HR SIZE=\"1\">";
 foreach my $cnt (0..$#ITEMTYPE)
 {
 	$disp.=$cnt==$tp ? "[" : "<A HREF=\"$MYNAME?$USERPASSURL&tp=$cnt&t=2\">";
-	$disp.=GetTagImgItemType(0,$cnt) if $cnt && !$MOBILE;
+	$disp.=GetTagImgItemType(0,$cnt) if $cnt;
 	$disp.=$ITEMTYPE[$cnt];
 	$disp.=$cnt==$tp ? "]" :"</A>";
 	$disp.=" ";
 }
 $disp.="<hr size=\"1\">";
 
-$disp.=<<"HTML" if $tp || !$MOBILE;
+$disp.=<<"HTML";
 <form action="shop.cgi" $METHOD>
 $USERPASSFORM
 <input type=hidden name=tp value=\"$tp\">
@@ -104,7 +101,6 @@ foreach my $item (@itemlist[$pagestart..$pageend])
 	
 	$disp.=$TD."RANK ".$rank.$TD.GetTagImgGuild($guild{$shopid}).$itempro{$shopid}.$shopname;
 	$disp.=$TRE;
-	$disp.="<HR SIZE=\"1\">" if $MOBILE;
 }
 $disp.=$TBE;
 #$disp.="<HR SIZE=1>";

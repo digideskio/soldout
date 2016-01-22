@@ -55,16 +55,8 @@ foreach(@MESSAGE[$pagestart..$pageend])
 	$tm=GetTime2FormatTime($tm,1);
 	my($towncode)=($msgid=~/(\w+)$/);
 	$townname=qq|<a target="_blank" href="jump.cgi?gmsgtown=$towncode">$townname</a>| if !$oktown{$towncode}++;
-	
-	if($MOBILE)
-	{
-		$disp.=$tm."<BR>".$townname.":".$shopname."<BR>".$replymsgid.EscapeHTML($message);
-		$disp.="<HR SIZE=1>";
-	}
-	else
-	{
-		$disp.=$TR.$TDNW.$tm.$TD.$townname.$TD.$shopname.$TD.$replymsgid.EscapeHTML($message).$TRE;
-	}
+
+	$disp.=$TR.$TDNW.$tm.$TD.$townname.$TD.$shopname.$TD.$replymsgid.EscapeHTML($message).$TRE;
 }
 $disp.=$TBE;
 

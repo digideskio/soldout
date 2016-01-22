@@ -28,7 +28,6 @@ foreach my $cnt ($pagestart .. $pageend)
 	next if !$DT->{status};
 	
 	$disp.="RANK ".($cnt+1)." ";
-	$disp.="<BR>" if $MOBILE;
 	$disp.=GetTagImgGuild($DT->{guild})." ".$DT->{shopname}."<BR>";
 	$disp.="一言:$DT->{comment}<BR>" if $DT->{comment};
 	

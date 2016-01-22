@@ -24,8 +24,6 @@ sub GetRankMessage
 	my($rank,$mode)=@_;
 	my $per=int($rank/100);
 	
-	return $per.(!$mode?"%":"") if $MOBILE;
-	
 	my $bar="";
 	$bar ="<nobr>";
 	#$bar.=qq|<img src="$IMAGE_URL/b$IMAGE_EXT" style="width:|.(    $per).qq|; height:12">| if $per;
@@ -63,8 +61,6 @@ sub CheckShowCaseNumber
 sub GetTopCountImage
 {
 	my($count)=@_;
-	
-	return $count."回優勝" if $MOBILE;
 	
 	my $ret="";
 	if(!@TOP_COUNT_IMAGE_LIST)
@@ -142,7 +138,7 @@ sub GetTagImgShopIcon
 {
 	my($icon)=@_;
 	
-	return "" if $MOBILE || $icon eq '';
+	return "" if $icon eq '';
 	
 	return qq|<img src="$IMAGE_URL/shop-$icon$IMAGE_EXT" class="shopicon">|;
 }

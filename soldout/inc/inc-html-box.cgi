@@ -25,7 +25,6 @@ my $pagecontrol=GetPageControl($pageprev,$pagenext,"","lpg",$pagemax,$page);
 $disp.=$pagecontrol;
 
 $disp.="<BR>";
-#$disp.=$TB if !$MOBILE;
 $disp.="<HR SIZE=\"1\">";
 
 foreach my $cnt ($pagestart..$pageend)
@@ -155,7 +154,7 @@ foreach my $cnt ($pagestart..$pageend)
 	$disp.=$ret;
 	$disp.="<HR SIZE=\"1\">";
 }
-#$disp.=$TBE if !$MOBILE;
+#$disp.=$TBE;
 
 $disp.=$pagecontrol;
 

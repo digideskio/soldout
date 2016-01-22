@@ -3,17 +3,14 @@
 RequireFile('inc-html-ownerinfo.cgi');
 
 my $itemlist="";
-if($tp!=0 || !$MOBILE)
+$itemlist="<select name=itn>";
+my @sort;
+foreach(keys %itemlist){$sort[$_]=$ITEM[$_]->{sort}};
+foreach(0,grep($ITEM[$_]->{type}==$tp || !$tp,sort{$sort[$a] <=> $sort[$b]}keys(%itemlist)))
 {
-	$itemlist="<select name=itn>";
-	my @sort;
-	foreach(keys %itemlist){$sort[$_]=$ITEM[$_]->{sort}};
-	foreach(0,grep($ITEM[$_]->{type}==$tp || !$tp,sort{$sort[$a] <=> $sort[$b]}keys(%itemlist)))
-	{
-		$itemlist.="<option value=\"$_\"".($_==$Q{itn}?' SELECTED':'').">".$ITEM[$_]->{name};
-	}
-	$itemlist.="</select>";
+	$itemlist.="<option value=\"$_\"".($_==$Q{itn}?' SELECTED':'').">".$ITEM[$_]->{name};
 }
+$itemlist.="</select>";
 
 @itemlist=sort { $a->[7] <=> $b->[7] } @itemlist;
 
@@ -30,7 +27,7 @@ $disp.="<HR SIZE=\"1\">";
 foreach my $cnt (0..$#ITEMTYPE)
 {
 	$disp.="<A HREF=\"$MYNAME?$USERPASSURL&tp=$cnt&t=2\">" if $cnt!=$tp;
-	$disp.=GetTagImgItemType(0,$cnt) if $cnt && !$MOBILE;
+	$disp.=GetTagImgItemType(0,$cnt) if $cnt;
 	$disp.="&lt;" if $cnt==$tp;
 	$disp.=$ITEMTYPE[$cnt];
 	$disp.="&gt;" if $cnt==$tp;
@@ -39,7 +36,7 @@ foreach my $cnt (0..$#ITEMTYPE)
 }
 $disp.="<hr size=\"1\">";
 
-$disp.=<<"HTML" if $tp!=0 || !$MOBILE;
+$disp.=<<"HTML";
 <form action="$MYNAME" $METHOD>
 $USERPASSFORM
 <input type=hidden name=tp value=\"$tp\">
@@ -75,7 +72,6 @@ foreach my $cnt ($pagestart .. $pageend)
 	
 	$disp.=$TDNW.$item->[1]."<br>".$item->[2].$TD.EscapeHTML($item->[6]);
 	$disp.=$TRE;
-	$disp.="<HR SIZE=\"1\">" if $MOBILE;
 }
 $disp.=$TBE;
 #$disp.="<HR SIZE=1>";

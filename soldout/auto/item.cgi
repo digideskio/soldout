@@ -36,19 +36,16 @@ sub GetTagImgItemType
 		$ITEM=$ITEM[$itemno];
 		$type=$ITEM->{type};
 	}
-	
-	if(!$MOBILE)
+
+	return qq|<IMG class="s" SRC="$IMAGE_URL/item-typesign$type$IMAGE_EXT">| if $mode==1;
+	if($ITEM->{existimage})
 	{
-		return qq|<IMG class="s" SRC="$IMAGE_URL/item-typesign$type$IMAGE_EXT">| if $mode==1;
-		if($ITEM->{existimage})
-		{
-			my $filename=$ITEM->{existimage}==1 ? "item-code-$ITEM->{code}" : "item-no-$itemno";
-			return qq|<IMG class="|.($mode==2?'il':'i').qq|" SRC="$IMAGE_URL/$filename$IMAGE_EXT">|;
-		}
-		return qq|<IMG class="i" SRC="$IMAGE_URL/item-type$type$IMAGE_EXT">| if $mode!=2;
-		return "";
+		my $filename=$ITEM->{existimage}==1 ? "item-code-$ITEM->{code}" : "item-no-$itemno";
+		return qq|<IMG class="|.($mode==2?'il':'i').qq|" SRC="$IMAGE_URL/$filename$IMAGE_EXT">|;
 	}
-	
+	return qq|<IMG class="i" SRC="$IMAGE_URL/item-type$type$IMAGE_EXT">| if $mode!=2;
+	return "";
+
 	return "" if $mode==2;
 	return $ITEMTYPE[$type].($mode==1?'専門店':'').":";
 }
